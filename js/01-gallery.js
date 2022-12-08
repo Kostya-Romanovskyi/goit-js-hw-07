@@ -6,8 +6,6 @@ const galaryEl = document.querySelector(".gallery");
 
 const cardsMarkup = onCreateGalaryElements(galleryItems);
 
-galaryEl.insertAdjacentHTML("beforeend", cardsMarkup);
-
 // Функція створення айтемів галереї
 function onCreateGalaryElements(galleryItems) {
   return galleryItems
@@ -26,6 +24,8 @@ function onCreateGalaryElements(galleryItems) {
     })
     .join("");
 }
+
+galaryEl.insertAdjacentHTML("beforeend", cardsMarkup);
 
 galaryEl.addEventListener("click", onGetOriginalPicture);
 
@@ -55,14 +55,6 @@ function onGetOriginalPicture(event) {
   //   onCloseEsc(event);
 }
 
-// function onCloseEsc(event) {
-//   if (event.code === "Escape") {
-//     instance.close();
-//   }
-
-//   console.log(instance.close());
-// }
-
 // Функція перевірки таргету
 function onCheckImgElement(event) {
   if (!event.target.classList.contains("gallery__image")) {
@@ -74,5 +66,3 @@ function onCheckImgElement(event) {
 function removeTransitionOnLink(event) {
   event.preventDefault();
 }
-
-console.log(galleryItems);
