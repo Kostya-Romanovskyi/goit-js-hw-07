@@ -31,38 +31,40 @@ galaryEl.addEventListener("click", onGetOriginalPicture);
 
 // Функція відкриття великої картинки
 function onGetOriginalPicture(event) {
-  onCheckImgElement(event);
+  //   onCheckImgElement(event);
 
-  const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="800" height="600">
-`);
+  // відключення переходу по посиланню
+  event.preventDefault();
 
-  instance.show();
-
-  removeTransitionOnLink(event);
-
-  galaryEl.addEventListener("keydown", (event) => {
-    if (event.code === "Escape") {
-      instance.close();
-    }
-  });
-  //   function onCloseEsc(event) {
-  //     if (event.code === "Escape") {
-  //       instance.close();
-  //     }
-  //     console.log(instance.close());
-  //   }
-  //   onCloseEsc(event);
-}
-
-// Функція перевірки таргету
-function onCheckImgElement(event) {
+  // перевірка таргета
   if (!event.target.classList.contains("gallery__image")) {
     return;
   }
+
+  const instance = basicLightbox.create(
+    `
+    <img src="${event.target.dataset.source}" width="800" height="600">
+// `,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", (event) => {
+          if (event.code === "Escape") {
+            instance.close();
+          }
+        });
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", (event) => {
+          if (event.code === "Escape") {
+            instance.close();
+          }
+        });
+      },
+    }
+  );
+  instance.show();
 }
 
-// функція відключення переходу по посиланню
-function removeTransitionOnLink(event) {
-  event.preventDefault();
-}
+// basicLightbox.close({
+//   afterClose: () => console.log("afterClose"),
+// });

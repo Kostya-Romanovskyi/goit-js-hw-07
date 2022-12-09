@@ -30,9 +30,3 @@ var lightbox = new SimpleLightbox(".gallery a", {
   widthRatio: 0.9,
   heightRatio: 0.9,
 });
-
-galary.addEventListener("click", onDisabledDownloadPicture);
-
-function onDisabledDownloadPicture(evt) {
-  evt.preventDefault();
-}
