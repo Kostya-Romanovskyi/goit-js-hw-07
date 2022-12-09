@@ -64,7 +64,3 @@ function onGetOriginalPicture(event) {
   );
   instance.show();
 }
-
-// basicLightbox.close({
-//   afterClose: () => console.log("afterClose"),
-// });
